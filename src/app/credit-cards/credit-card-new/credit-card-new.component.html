@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col mx-auto">
+    <h3>New Card</h3>
+    <div class="row">
+      <div class="col mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="addPaymentForm" (ngSubmit)="saveNewCard(addPaymentForm.value)">
+              <div class="form-group">
+                <label for="cardHolder">Card Holder</label>
+                <input type="text" formControlName="cardHolder" autocomplete="cc-name" class="form-control"
+                  id="cardHolder">
+                <ng-container
+                  *ngIf="(formControls.cardHolder.dirty || formControls.cardHolder.touched) && formControls.cardHolder.errors">
+                  <small class="text-danger" *ngIf="formControls.cardHolder.errors.required">
+                    Enter card holder name
+                  </small>
+                </ng-container>
+              </div>
+              <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="tel" formControlName="cardNumber" autocomplete="cc-number" class="form-control"
+                  id="cardNumber">
+                <ng-container
+                  *ngIf="(formControls.cardNumber.dirty || formControls.cardNumber.touched) && formControls.cardNumber.errors">
+                  <small class="text-danger" *ngIf="formControls.cardNumber.errors.required">
+                    Enter card number
+                  </small>
+                  <small class="text-danger" *ngIf="formControls.cardNumber.errors.pattern">
+                    Card number should contain no characters/letters and must be 12 numbers
+                  </small>
+                </ng-container>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-7">
+                  <div class="form-group">
+                    <label for="cardExpiry">Expiry Date</label>
+                    <input type="month" formControlName="expiry" autocomplete="cc-exp" class="form-control"
+                      id="cardExpiry">
+                    <ng-container
+                      *ngIf="(formControls.expiry.dirty || formControls.expiry.touched) && formControls.expiry.errors">
+                      <small class="text-danger" *ngIf="formControls.expiry.errors.required">
+                        Please select expiry date
+                      </small>
+                      <small class="text-danger" *ngIf="formControls.expiry.errors.hasExpired">
+                        Expiry date is invalid
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-4 ml-auto">
+                  <div class="form-group">
+                    <label for="cardCVV">CCV</label>
+                    <input type="text" formControlName="ccv" minlength="3" maxlength="3" autocomplete="cc-csc"
+                      class="form-control" id="cardCVV">
+                    <ng-container
+                      *ngIf="(formControls.ccv.dirty || formControls.ccv.touched) && formControls.ccv.errors">
+                      <small class="text-danger" *ngIf="formControls.ccv.errors.pattern">
+                        should be 3 numbers
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" min="1" formControlName="amount" autocomplete="transaction-amount"
+                  class="form-control" id="amount">
+                <ng-container
+                  *ngIf="(formControls.amount.dirty || formControls.amount.touched) && formControls.amount.errors">
+                  <small class="text-danger" *ngIf="formControls.amount.errors.required">
+                    Please enter amount
+                  </small>
+                  <small class="text-danger" *ngIf="formControls.amount.errors.min">
+                    Amount has to be more than 0
+                  </small>
+                </ng-container>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-6 my-1">
+                  <button [disabled]="isAddingNewCard$ | async" type="submit" class="btn btn-block btn-primary">
+                    <div *ngIf="isAddingNewCard$ | async" class="spinner-border spinner-border-sm mr-3" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    <span>{{(isAddingNewCard$ | async) ? 'Savinng' : 'Save Payment'}}</span>
+                  </button>
+                </div>
+                <div class="col-12 col-lg-6 my-1">
+                  <button type="button" class="btn btn-outline-secondary btn-block"
+                    (click)="cancelCardAddition()">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
