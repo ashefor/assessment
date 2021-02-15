@@ -6,6 +6,7 @@ import { AppState } from './state/app.state';
 import { getCards, getIsLoadingCards, getError } from './state/card.reducer';
 import * as CreditCardActions from './state/card.action';
 import { CreditCard } from './credit-cards/credit-card';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,13 +22,13 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.store.dispatch(CreditCardActions.loadCards())
+    this.store.dispatch(CreditCardActions.loadCards());
     this.cards$ = this.store.select(getCards);
-    this.isLoadingCards$ = this.store.select(getIsLoadingCards)
+    this.isLoadingCards$ = this.store.select(getIsLoadingCards);
     this.errorMessage$ = this.store.select(getError);
   }
 
   navigateToPayments() {
-    this.router.navigate(['/new-card'])
+    this.router.navigate(['/new-card']);
   }
 }

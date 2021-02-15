@@ -20,9 +20,9 @@ export class CreditCardNewComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private store: Store<AppState>, private router: Router) { }
 
   ngOnInit(): void {
-    this.formInit()
-    this.isAddingNewCard$ = this.store.select(getIsAddingNewCard)
-    this.resetSubscription = this.store.select(getIsDoneAddingCard).subscribe(() => this.addPaymentForm.reset())
+    this.formInit();
+    this.isAddingNewCard$ = this.store.select(getIsAddingNewCard);
+    this.resetSubscription = this.store.select(getIsDoneAddingCard).subscribe(() => this.addPaymentForm.reset());
   }
 
   ngOnDestroy() {
@@ -31,11 +31,11 @@ export class CreditCardNewComponent implements OnInit, OnDestroy {
   formInit() {
     this.addPaymentForm = this.fb.group({
       cardHolder: [null, [Validators.required]],
-      cardNumber: [null, [Validators.required, Validators.pattern("[0-9\s]{12}")]],
+      cardNumber: [null, [Validators.required, Validators.pattern('[0-9\s]{12}')]],
       expiry: [null, this.expiryDateValidator],
-      ccv: [null, [Validators.pattern("[0-9\s]{3}")]],
+      ccv: [null, [Validators.pattern('[0-9\s]{3}')]],
       amount: [null, [Validators.required, Validators.min(1)]],
-    })
+    });
   }
 
   get formControls() {
@@ -43,8 +43,11 @@ export class CreditCardNewComponent implements OnInit, OnDestroy {
   }
 
   saveNewCard(formValue: CreditCard) {
+    Object.keys(this.addPaymentForm.controls).forEach(key => {
+      this.addPaymentForm.controls[key].markAsDirty();
+      this.addPaymentForm.controls[key].updateValueAndValidity();
+    });
     if (this.addPaymentForm.valid) {
-      console.log(formValue)
       this.store.dispatch(CreditCardActions.createCard({ card: formValue }));
     }
   }
@@ -54,15 +57,15 @@ export class CreditCardNewComponent implements OnInit, OnDestroy {
     const currentDate = new Date(Date.now()).getTime();
     const formattedDate = new Date(expiryDate).getTime();
     if (!expiryDate) {
-      return { error: true, required: true }
+      return { error: true, required: true };
     }
     else if (formattedDate - currentDate < 0) {
-      return { error: true, hasExpired: true }
+      return { error: true, hasExpired: true };
     }
-    return {}
+    return {};
   }
 
   cancelCardAddition() {
-this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 }

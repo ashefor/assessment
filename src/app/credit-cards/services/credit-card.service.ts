@@ -16,7 +16,7 @@ export class CreditCardService {
   getCreditCards(): Observable<CreditCard[]> {
     return this.http.get<CreditCard[]>(this.creditCardUrl).pipe(
       catchError(this.handleError)
-    )
+    );
   }
 
 
@@ -24,26 +24,7 @@ export class CreditCardService {
     const newCard = { ...card, id: null };
     return this.http.post<CreditCard>(this.creditCardUrl, newCard)
       .pipe(
-        tap(data => this.toastr.success('Added successfully')),
-        catchError(this.handleError)
-      );
-  }
-
-
-  updateCard(card: CreditCard): Observable<CreditCard> {
-    const url = `${this.creditCardUrl}/${card.id}`;
-    return this.http.put<CreditCard>(url, card)
-      .pipe(
-        map(() => card),
-        catchError(this.handleError)
-      );
-  }
-
-
-  deleteCard(id: number): Observable<{}> {
-    const url = `${this.creditCardUrl}/${id}`;
-    return this.http.delete<CreditCard>(url)
-      .pipe(
+        tap(() => this.toastr.success('Added successfully')),
         catchError(this.handleError)
       );
   }
