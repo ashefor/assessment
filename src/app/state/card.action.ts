@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CreditCard } from '../credit-cards/credit-card';
+import { CreditCard } from '../credit-card/credit-card';
 
 export const loadCards = createAction(
     '[Card API] Load Cards',

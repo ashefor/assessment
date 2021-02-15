@@ -9,7 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { CreditCardData } from './credit-cards/credit-card-data';
+import { CreditCardData } from './credit-card/credit-card-data';
 import { ToastrModule, ToastNoAnimationModule } from 'ngx-toastr';
 import { cardReducer } from './state/card.reducer';
 import { CardEffects } from './state/card.effect';

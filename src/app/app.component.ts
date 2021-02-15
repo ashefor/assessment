@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AppState } from './state/app.state';
 import { getCards, getIsLoadingCards, getError } from './state/card.reducer';
 import * as CreditCardActions from './state/card.action';
-import { CreditCard } from './credit-cards/credit-card';
+import { CreditCard } from './credit-card/credit-card';
 
 @Component({
   selector: 'app-root',

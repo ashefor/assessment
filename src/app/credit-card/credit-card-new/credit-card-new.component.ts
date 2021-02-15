@@ -31,7 +31,7 @@ export class CreditCardNewComponent implements OnInit, OnDestroy {
   formInit() {
     this.addPaymentForm = this.fb.group({
       cardHolder: [null, [Validators.required]],
-      cardNumber: [null, [Validators.required, Validators.pattern('[0-9\s]{12}')]],
+      cardNumber: [null, [Validators.required, Validators.pattern('[0-9\s]{12,20}')]],
       expiry: [null, this.expiryDateValidator],
       ccv: [null, [Validators.pattern('[0-9\s]{3}')]],
       amount: [null, [Validators.required, Validators.min(1)]],

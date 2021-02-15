@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: 'new-card',
-    loadChildren: () => import('./credit-cards/credit-cards.module').then(m => m.CreditCardsModule)
+    loadChildren: () => import('./credit-card/credit-card.module').then(m => m.CreditCardModule)
   },
 ];
 

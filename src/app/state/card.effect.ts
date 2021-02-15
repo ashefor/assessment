@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
-import { CreditCardService } from '../credit-cards/services/credit-card.service';
+import { CreditCardService } from '../credit-card/services/credit-card.service';
 import * as CreditCardActions from './card.action';
 @Injectable({providedIn: 'root'})
 export class CardEffects {

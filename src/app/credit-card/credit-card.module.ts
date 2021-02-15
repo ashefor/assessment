@@ -17,4 +17,4 @@ const creditCardRoutes: Routes = [
     RouterModule.forChild(creditCardRoutes)
   ]
 })
-export class CreditCardsModule { }
+export class CreditCardModule { }

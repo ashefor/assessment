@@ -1,5 +1,5 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import { CreditCard } from '../credit-cards/credit-card';
+import { CreditCard } from '../credit-card/credit-card';
 import * as CreditCardActions from './card.action';
 export interface CardState {
     currentCardId: number | null;
